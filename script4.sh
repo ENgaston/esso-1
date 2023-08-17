@@ -30,7 +30,6 @@ while true; do
         break
     fi
 done
-
 # Prompt user for password
 read -sp "Enter your chosen password: " password
 echo
