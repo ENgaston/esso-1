@@ -10,5 +10,5 @@ fi
 if grep -q "^$1:" /etc/passwd; then
     echo "User $1 exists."
 else
-    echo "User $1 does not exist."
-fi
+    echo "User $1 does not exist."hshshhs
+fisssss
