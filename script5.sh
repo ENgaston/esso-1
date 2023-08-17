@@ -2,7 +2,7 @@
 
 # Check for the required argument
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <username>"
+    echo "Usage: $0 esso"
     exit 1
 fi
 
