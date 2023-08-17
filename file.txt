@@ -1,0 +1,41 @@
+import requests
+import csv
+
+# Step 1: Download data from a URL
+def download_data(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        decoded_content = response.content.decode('utf-8')
+        data = list(csv.reader(decoded_content.splitlines(), delimiter=','))
+        return data
+    else:
+        print(f"Failed to download data from {url}. Status code: {response.status_code}")
+        return None
+
+# Step 2: Process data (for this example, we'll just remove the first row assuming it's a header)
+def process_data(data):
+    if not data:
+        return None
+    # Remove header
+    processed_data = data[1:]
+    return processed_data
+
+# Step 3: Save data to a file
+def save_to_file(data, file_name):
+    with open(file_name, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
+
+if __name__ == "__main__":
+    URL = "YOUR_DATA_URL_HERE"  # Replace with your data URL
+    OUTPUT_FILE = "output.csv"
+    
+    downloaded_data = download_data(URL)
+    processed_data = process_data(downloaded_data)
+    
+    if processed_data:
+        save_to_file(processed_data, OUTPUT_FILE)
+        print(f"Data saved to {OUTPUT_FILE}")
+    else:
+        print("No data to save.")
+
