@@ -1,0 +1,41 @@
+import requests
+from PIL import Image
+from io import BytesIO
+
+# Step 1: Download image from a URL
+def download_image(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        image = Image.open(BytesIO(response.content))
+        return image
+    else:
+        print(f"Failed to download image from {url}. Status code: {response.status_code}")
+        return None
+
+# Step 2: Convert the image to grayscale
+def convert_to_grayscale(image):
+    return image.convert("L")
+
+# Step 3: Resize the image
+def resize_image(image, width, height):
+    return image.resize((width, height))
+
+# Step 4: Save processed image to a file
+def save_image(image, file_name):
+    image.save(file_name)
+
+if __name__ == "__main__":
+    URL = "YOUR_IMAGE_URL_HERE"  # Replace with your image URL
+    OUTPUT_FILE = "processed_image.jpg"
+    NEW_WIDTH = 300  # Change this value as required
+    NEW_HEIGHT = 300  # Change this value as required
+
+    downloaded_image = download_image(URL)
+    
+    if downloaded_image:
+        grayscale_image = convert_to_grayscale(downloaded_image)
+        resized_image = resize_image(grayscale_image, NEW_WIDTH, NEW_HEIGHT)
+        save_image(resized_image, OUTPUT_FILE)
+        print(f"Processed image saved to {OUTPUT_FILE}")
+    else:
+        print("No image to process.")uuuuuu
